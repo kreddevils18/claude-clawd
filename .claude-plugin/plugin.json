@@ -1,0 +1,10 @@
+{
+  "name": "clawd",
+  "version": "0.1.0",
+  "description": "Clawd, a pixel pet that reacts to what Claude Code does: grows with context, tires with rate limits, levels up with hats.",
+  "author": { "name": "Kien Hoang Trung" },
+  "repository": "https://github.com/kienincl/claude-clawd",
+  "license": "MIT",
+  "keywords": ["pet", "pixel-art", "mod", "fun"],
+  "types": "./types/index.d.ts"
+}

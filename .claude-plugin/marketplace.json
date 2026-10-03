@@ -1,0 +1,15 @@
+{
+  "name": "claude-clawd",
+  "owner": {
+    "name": "Kien Hoang Trung"
+  },
+  "plugins": [
+    {
+      "name": "clawd",
+      "source": "./",
+      "description": "Clawd, a pixel pet that reacts to what Claude Code does.",
+      "category": "fun"
+    }
+  ],
+  "description": "Clawd, a pixel pet mod for Claude Code. Unofficial."
+}

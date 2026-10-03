@@ -1,0 +1,38 @@
+name: New state
+description: Propose something new for Clawd to do
+title: "New state: "
+labels: ["new-state"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: A short kebab-case id, like `cheering`.
+    validations:
+      required: true
+  - type: textarea
+    id: trigger
+    attributes:
+      label: Trigger
+      description: What makes Clawd do this? Which `Signals` fields does it read? If it needs a new signal, which Claude Code event would feed it?
+    validations:
+      required: true
+  - type: input
+    id: priority
+    attributes:
+      label: Where in the priority order
+      description: Between which two existing states? (See the table in CONTRIBUTING.md.)
+    validations:
+      required: true
+  - type: textarea
+    id: sketch
+    attributes:
+      label: Sketch
+      description: ASCII, a screenshot from a pixel editor, anything. How does it look in the 9×3 band?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you send
+      options:
+        - label: It is clearly different from its neighbors in the priority order.
+        - label: It does not need sound (or I explain why it should).
