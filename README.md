@@ -11,7 +11,7 @@ A pixel pet for [Claude Code](https://code.claude.com). Clawd lives above your p
 In Claude Code:
 
 ```
-/plugin marketplace add kienincl/claude-clawd
+/plugin marketplace add kreddevils18/claude-clawd
 /plugin install clawd@claude-clawd
 ```
 
