@@ -8,7 +8,7 @@ export const COLUMNS = CANVAS_W
 export const ROWS = CANVAS_H / 2
 
 /** The terminal's own background, in the Raster color encoding. */
-export const DEFAULT_COLOR = 0x01000000
+const DEFAULT_COLOR = 0x01000000
 
 export type Cell = { ch: string; fg: number; bg: number }
 

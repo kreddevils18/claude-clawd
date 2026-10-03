@@ -26,8 +26,8 @@ export type Pixels = {
   clipped: number
 }
 
-export const GLYPH_COLUMNS = CANVAS_W
-export const GLYPH_ROWS = CANVAS_H / 2
+const GLYPH_COLUMNS = CANVAS_W
+const GLYPH_ROWS = CANVAS_H / 2
 
 export const isDrawableGlyph = (col: number, row: number, ch: string): boolean =>
   Number.isInteger(col) &&
@@ -81,13 +81,7 @@ export const rasterize = (frame: Frame): Pixels => {
   // Mouth and cheeks.
   if (frame.mouth) {
     for (const r of MOUTHS[frame.mouth]) {
-      fill(
-        box.originX + MOUTH_X + r.dx,
-        box.mouthY + r.dy,
-        r.w,
-        r.h,
-        r.tongue ? PALETTE.blush : PALETTE.shade,
-      )
+      fill(box.originX + MOUTH_X + r.dx, box.mouthY + r.dy, r.w, r.h, PALETTE.shade)
     }
   }
   if (frame.blush) {

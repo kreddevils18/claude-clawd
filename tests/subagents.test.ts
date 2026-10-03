@@ -20,7 +20,7 @@ const agent = (patch: Partial<AgentInfo> = {}): AgentInfo => ({
   id: 'a1', name: 'Explore', startedAt: T0 - 3000, activeAt: T0, endedAt: null, tool: null, toolsInFlight: 0, lastTool: null, ...patch,
 })
 
-const modelFor = (agents: AgentInfo[], columns = 120) => {
+const modelFor = (agents: AgentInfo[]) => {
   const s = signalsAt({ agents, turn: 'thinking' })
   const state = selectState(s)
   const mini = miniQuadrantRenderer.render(composeFrame(state, s, profileWith(), 0), { background: 'default' })

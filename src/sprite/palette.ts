@@ -28,7 +28,5 @@ export const PALETTE = Object.freeze({
   wizardDark: 0x3c2a6e,
 })
 
-export type PaletteName = keyof typeof PALETTE
-
 /** 0xRRGGBB → '#rrggbb', for surfaces that take CSS-like color strings. */
 export const toHex = (color: number): string => `#${color.toString(16).padStart(6, '0')}`

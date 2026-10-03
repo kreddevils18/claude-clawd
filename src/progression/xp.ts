@@ -4,8 +4,8 @@ import type { HatChoice, Profile } from '../../types/index.d.ts'
 
 export type Hat = Exclude<HatChoice, 'auto' | 'none'>
 
-export const XP_PER_TURN = 10
-export const XP_PER_TOOL = 1
+const XP_PER_TURN = 10
+const XP_PER_TOOL = 1
 export const XP_TURN_CAP = 30
 
 /** (level, hat) in unlock order. */
@@ -26,7 +26,7 @@ export const DEFAULT_PROFILE: Profile = Object.freeze({
 export const levelFor = (xp: number): number => Math.floor(Math.sqrt(Math.max(0, xp) / 25)) + 1
 
 /** XP at which `level` begins. */
-export const xpForLevel = (level: number): number => 25 * (level - 1) ** 2
+const xpForLevel = (level: number): number => 25 * (level - 1) ** 2
 
 export const xpToNextLevel = (xp: number): number => xpForLevel(levelFor(xp) + 1) - xp
 

@@ -22,7 +22,7 @@ const bitmap = (rows: readonly string[], legend: Legend): Bitmap => {
 }
 
 /** Expand a bitmap to dots at (x, y); `recolor` overrides legend entries. */
-export const bitmapDots = (bm: Bitmap, x: number, y: number, recolor?: Legend): Dot[] => {
+const bitmapDots = (bm: Bitmap, x: number, y: number, recolor?: Legend): Dot[] => {
   const dots: Dot[] = []
   bm.rows.forEach((row, ry) => {
     for (let rx = 0; rx < row.length; rx++) {
@@ -61,10 +61,6 @@ export const BOOK = bitmap(
   { c: P.cover, p: P.paper, l: P.ink },
 )
 
-export const BATTERY_FULL = bitmap(
-  ['##########.', '#gggggggg##', '#gggggggg##', '##########.'],
-  { '#': P.steel, g: P.battery },
-)
 export const BATTERY_LOW = bitmap(
   ['##########.', '#ww......##', '#ww......##', '##########.'],
   { '#': P.steel, w: P.warn },

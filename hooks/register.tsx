@@ -4,7 +4,7 @@
 //                                          │
 //                                  worthStoring + sound edge
 import { atom, read } from 'claude-code'
-import type { EngineInterface, Register, Timer } from 'claude-code'
+import type { Elements, EngineInterface, Register, Timer } from 'claude-code'
 
 import type { Profile } from '../types/index.d.ts'
 import { hatProblem, parseCommand, statsText, USAGE } from '../src/core/commands.ts'
@@ -55,6 +55,17 @@ let lastPanePicture = ''
 let lastRemotePicture = ''
 let lastBandPicture = ''
 let toolsOkThisTurn = 0
+
+/** One row of styled text: the band and the pane both draw their terminal lines this way. */
+const spansText = (Text: Elements['terminal']['Text'], spans: readonly Span[]) => (
+  <Text>
+    {spans.map(span => (
+      <Text color={span.color} backgroundColor={span.bg} bold={span.bold} dimColor={span.dim}>
+        {span.text}
+      </Text>
+    ))}
+  </Text>
+)
 
 /** Reduce one event into the shared snapshot, store it when it matters, play a sound on state entry. */
 async function emit($: EngineInterface, event: SignalEvent) {
@@ -169,7 +180,7 @@ export const register: Register = on => {
     return next(e)
   })
 
-  on('session.end', async ($, e, next) => {
+  on('session.end', async (_$, e, next) => {
     // /clear ends the session id but not the process or the pane.
     if (e.reason !== 'clear') stopPaneLoop()
     return next(e)
@@ -335,19 +346,7 @@ export const register: Register = on => {
     if (e.surface === 'terminal') {
       const { Box, Text } = $.ui.resolve(e)
       const rows = terminalBand(model, columns, tickOf(now))
-      return (
-        <Box flexDirection="column">
-          {rows.map(spans => (
-            <Text>
-              {spans.map(span => (
-                <Text color={span.color} backgroundColor={span.bg} bold={span.bold} dimColor={span.dim}>
-                  {span.text}
-                </Text>
-              ))}
-            </Text>
-          ))}
-        </Box>
-      )
+      return <Box flexDirection="column">{rows.map(spans => spansText(Text, spans))}</Box>
     }
     if (e.surface === 'desktop' || e.surface === 'vscode' || e.surface === 'mobile') {
       const { Box, Svg } = $.ui.resolve(e)
@@ -375,19 +374,10 @@ export const register: Register = on => {
 
     if (e.surface === 'terminal') {
       const { Box, Text, Raster } = $.ui.resolve(e)
-      const line = (spans: Span[]) => (
-        <Text>
-          {spans.map(span => (
-            <Text color={span.color} backgroundColor={span.bg} bold={span.bold} dimColor={span.dim}>
-              {span.text}
-            </Text>
-          ))}
-        </Text>
-      )
       return (
         <Box flexDirection="column">
           <Raster key={RASTER_KEY} {...fullRasterRenderer.render(view.frame, THEME)} />
-          {paneLines(model, PANE_COLUMNS, tickOf(now)).map(line)}
+          {paneLines(model, PANE_COLUMNS, tickOf(now)).map(spans => spansText(Text, spans))}
         </Box>
       )
     }

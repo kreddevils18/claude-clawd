@@ -8,13 +8,13 @@
 import type { ArmPose, BodyOptions, EyeShape, LegPose, MouthShape } from './frame.ts'
 
 /** Where the resting body's top-left corner sits on the canvas. */
-export const ORIGIN_X = 16
-export const ORIGIN_Y = 5
+const ORIGIN_X = 16
+const ORIGIN_Y = 5
 
 /** Body columns (offsets from the origin, inclusive) and rows. */
 export const BODY_FROM = 3
 export const BODY_TO = 14
-export const BODY_ROWS = 8
+const BODY_ROWS = 8
 
 export type CarveRect = { dx: number; dy: number; w: number; h: number }
 
@@ -49,13 +49,11 @@ export const EYES: Readonly<Record<EyeShape, readonly CarveRect[]>> = Object.fre
 /** Left and right eye anchors, relative to the body origin; the row is from the body's top. */
 export const EYE_LEFT_X = 5
 export const EYE_RIGHT_X = 12
-export const EYE_ROW = 2
+const EYE_ROW = 2
 export const MOUTH_X = 7
-export const MOUTH_ROW = 5
+const MOUTH_ROW = 5
 
-export type MouthRect = CarveRect & { tongue?: boolean }
-
-export const MOUTHS: Readonly<Record<MouthShape, readonly MouthRect[]>> = Object.freeze({
+export const MOUTHS: Readonly<Record<MouthShape, readonly CarveRect[]>> = Object.freeze({
   smile: [
     { dx: 0, dy: 0, w: 1, h: 1 },
     { dx: 1, dy: 1, w: 2, h: 1 },
@@ -68,10 +66,6 @@ export const MOUTHS: Readonly<Record<MouthShape, readonly MouthRect[]>> = Object
     { dx: 3, dy: 1, w: 1, h: 1 },
   ],
   flat: [{ dx: 0, dy: 1, w: 4, h: 1 }],
-  yawn: [
-    { dx: 0, dy: 0, w: 4, h: 3 },
-    { dx: 1, dy: 2, w: 2, h: 1, tongue: true },
-  ],
 })
 
 /** Cheeks, relative to the body origin: two pixels under each eye. */

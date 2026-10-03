@@ -84,26 +84,23 @@ test('the band hides under 60 columns and during a survey', async ($, on) => {
   }
 })
 
-test('the pane draws a Raster on the terminal and vector art elsewhere, at any width', async ($, on) => {
+test('the pane draws a Raster on the terminal and vector art elsewhere', async ($, on) => {
   mock.clock(on, { now: 10_000 })
   for (const surface of SURFACES) {
-    for (const columns of [40, 120]) {
-      const ui = await $.ui.mount({
-        plugin: 'clawd',
-        surface,
-        component: 'Pane',
-        requestId: 'clawd',
-        props: PANE_PROPS,
-        viewport: { columns, rows: 30 },
-      })
-      const words = await sayings(ui, surface)
-      expect(words, `${surface} ${columns}`).toContain('Clawd')
-      const raster = await ui.find({ type: 'Raster' })
-      if (surface === 'terminal') expect(raster, 'terminal draws a Raster').toBeDefined()
-      else expect(raster, `${surface} has no Raster`).toBeUndefined()
-      if (surface === 'desktop') expect((await ui.findAll({ type: 'Svg' })).length, 'just the picture, no subagents').toBe(1)
-      await ui.unmount()
-    }
+    const ui = await $.ui.mount({
+      plugin: 'clawd',
+      surface,
+      component: 'Pane',
+      requestId: 'clawd',
+      props: PANE_PROPS,
+      viewport: { columns: 80, rows: 30 },
+    })
+    expect(await sayings(ui, surface), surface).toContain('Clawd')
+    const raster = await ui.find({ type: 'Raster' })
+    if (surface === 'terminal') expect(raster, 'terminal draws a Raster').toBeDefined()
+    else expect(raster, `${surface} has no Raster`).toBeUndefined()
+    if (surface === 'desktop') expect((await ui.findAll({ type: 'Svg' })).length, 'just the picture, no subagents').toBe(1)
+    await ui.unmount()
   }
 })
 

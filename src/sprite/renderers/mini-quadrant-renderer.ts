@@ -5,8 +5,8 @@ import type { ArmPose, EyeShape, Frame, LegPose } from '../frame.ts'
 import { PALETTE } from '../palette.ts'
 import type { Renderer, Theme } from './renderer.ts'
 
-export const MINI_COLUMNS = 9
-export const MINI_ROWS = 3
+const MINI_COLUMNS = 9
+const MINI_ROWS = 3
 const GRID_W = MINI_COLUMNS * 2
 const GRID_H = MINI_ROWS * 2
 

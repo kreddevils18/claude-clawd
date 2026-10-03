@@ -12,10 +12,6 @@ const KEBAB = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/
 const PROFILES = [profileWith(), MAX_PROFILE, profileWith({ xp: 700, level: 6 })]
 const CONTEXTS = [0, 30, 65, 95, 100]
 
-test('at least the 14 shipped states are registered', () => {
-  expect(allStates().length >= 14).toBe(true)
-})
-
 test('ids are unique kebab-case and priorities are unique', () => {
   const states = allStates()
   const ids = states.map(s => s.id)

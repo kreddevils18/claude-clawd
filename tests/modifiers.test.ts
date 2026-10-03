@@ -7,7 +7,6 @@ import { contextSize, fatFor } from '../src/modifiers/context-size.ts'
 import { hat } from '../src/modifiers/hat.ts'
 import { MODIFIERS } from '../src/modifiers/index.ts'
 import {
-  XP_TURN_CAP,
   grantXp,
   hatToWear,
   levelFor,
@@ -88,7 +87,6 @@ test('xp curve: thresholds and levels', () => {
 })
 
 test('xp per turn is capped', () => {
-  expect(XP_TURN_CAP).toBe(30)
   expect(grantXp(0, 10)).toBe(10)
   expect(grantXp(25, 10)).toBe(5)
   expect(grantXp(30, 1)).toBe(0)

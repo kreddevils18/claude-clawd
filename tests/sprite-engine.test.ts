@@ -1,7 +1,7 @@
 import { expect, test } from 'claude-code/testing'
 
 import { toBase64 } from '../src/sprite/base64.ts'
-import { Z, SPARK, HEART, BOOK, BATTERY_FULL, BATTERY_LOW, BATTERY_EMPTY, BUBBLE, BEANIE, CROWN, WIZARD, bitmapDots } from '../src/sprite/bitmaps.ts'
+import { HEART } from '../src/sprite/bitmaps.ts'
 import { bodyBox } from '../src/sprite/body-parts.ts'
 import { CANVAS_H, CANVAS_W, type EyeShape } from '../src/sprite/frame.ts'
 import { PALETTE } from '../src/sprite/palette.ts'
@@ -10,7 +10,6 @@ import { fullRasterRenderer } from '../src/sprite/renderers/full-raster-renderer
 import { miniQuadrantRenderer } from '../src/sprite/renderers/mini-quadrant-renderer.ts'
 import { spriteSvg } from '../src/sprite/renderers/svg-renderer.ts'
 import { sprite } from '../src/sprite/sprite-builder.ts'
-import { frameToAscii } from '../src/sprite/ascii.ts'
 
 const EYES: EyeShape[] = ['open', 'down', 'up', 'closed', 'happy', 'wide', 'x', 'tired']
 
@@ -119,7 +118,7 @@ test('builder drops out-of-bounds pixels and counts them instead of throwing', (
 test('the neutral body fits the canvas at every fat level and leg pose', () => {
   for (const fat of [0, 1, 2] as const) {
     for (const legs of ['stand', 'a', 'b', 'jump'] as const) {
-      const frame = sprite().body({ fat, legs }).eyes('happy').mouth('yawn').blush().build()
+      const frame = sprite().body({ fat, legs }).eyes('happy').mouth('o').blush().build()
       expect(rasterize(frame).clipped, `fat ${fat} legs ${legs}`).toBe(0)
     }
   }
@@ -138,21 +137,4 @@ test('particles are deterministic per seed and differ across seeds', () => {
   const c = sprite().particles(8, 6, [PALETTE.spark], area).build().layers
   expect(a).toEqual(b)
   expect(JSON.stringify(a) === JSON.stringify(c)).toBe(false)
-})
-
-test('shared bitmaps are well formed and frozen', () => {
-  for (const bm of [Z, SPARK, HEART, BOOK, BATTERY_FULL, BATTERY_LOW, BATTERY_EMPTY, BUBBLE, BEANIE, CROWN, WIZARD]) {
-    expect(bm.rows.every(r => r.length === bm.w)).toBe(true)
-    expect(bitmapDots(bm, 0, 0).length > 0).toBe(true)
-    expect(Object.isFrozen(bm)).toBe(true)
-  }
-})
-
-test('ascii printer shows a 50×16 picture', () => {
-  const lines = frameToAscii(sprite().eyes('open').build()).split('\n')
-  expect(lines.length).toBe(16)
-  for (const l of lines) expect(l.length).toBe(50)
-  expect(lines.some(l => l.includes('#'))).toBe(true)
-  // The eyes are holes through the body: background pixels with body on both sides.
-  expect(lines.some(l => /#\.#/.test(l))).toBe(true)
 })

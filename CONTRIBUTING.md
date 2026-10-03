@@ -127,7 +127,7 @@ Drawing limits the contract test enforces: a body pushed **down** (`dy > 0`) nee
 
 Useful building blocks are in `src/sprite/`:
 
-- `body-parts.ts`: eye shapes (`open`, `down`, `up`, `closed`, `happy`, `wide`, `x`, `tired`), mouths (`smile`, `o`, `sad`, `flat`, `yawn`), arms (`side`, `up`, `half`, `down`, `wide`) and legs (`stand`, `a`, `b`, `jump`).
+- `body-parts.ts`: eye shapes (`open`, `down`, `up`, `closed`, `happy`, `wide`, `x`, `tired`), mouths (`smile`, `o`, `sad`, `flat`), arms (`side`, `up`, `half`, `down`, `wide`) and legs (`stand`, `a`, `b`, `jump`).
 - `bitmaps.ts`: shared art (`Z`, `SPARK`, `SPARK_SMALL`, `HEART`, `BOOK`, `BATTERY_LOW`, `BUBBLE`, hats). Draw one with `b.prop(bitmap, x, y, recolor?)`; text in a bubble is `b.text(col, row, 'hi', color)` on the 50×8 cell grid. If you add a new bitmap, put it here so other states can reuse it.
 - `palette.ts`: named colors (`PALETTE.spark`, …). Please don't hard-code hex values in state files.
 

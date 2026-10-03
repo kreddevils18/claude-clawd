@@ -6,7 +6,7 @@ import type { AgentScene } from '../agents/agent-view.ts'
 import { SPRITE_CROP, escapeXml, spriteSvgInner } from '../sprite/renderers/svg-renderer.ts'
 import { FLOWER_COLORS, hash } from './flowers.ts'
 
-export const MEADOW_H = 60
+const MEADOW_H = 60
 const SLOT = 62
 const SPRITE_SCALE = 2.4
 const SPRITE_W = SPRITE_CROP.w * SPRITE_SCALE
@@ -46,7 +46,7 @@ const butterfly = (x: number, y: number, flap: boolean, color: string): string =
 }
 
 /** The meadow as nested SVG content, `width` × MEADOW_H, for composing into a larger drawing. */
-export const meadowInner = (agents: readonly AgentScene[], tick: number): string => {
+const meadowInner = (agents: readonly AgentScene[], tick: number): string => {
   const width = meadowWidth(agents.length)
   const parts: string[] = []
   parts.push(`<clipPath id="mc"><rect width="${width}" height="${MEADOW_H}" rx="12"/></clipPath><g clip-path="url(#mc)">`)

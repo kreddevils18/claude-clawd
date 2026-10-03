@@ -4,7 +4,7 @@ export const CANVAS_W = 50
 export const CANVAS_H = 16
 
 export type EyeShape = 'open' | 'down' | 'up' | 'closed' | 'happy' | 'wide' | 'x' | 'tired'
-export type MouthShape = 'smile' | 'o' | 'sad' | 'flat' | 'yawn'
+export type MouthShape = 'smile' | 'o' | 'sad' | 'flat'
 export type ArmPose = 'side' | 'up' | 'half' | 'down' | 'wide'
 export type LegPose = 'stand' | 'a' | 'b' | 'jump'
 export type Fat = 0 | 1 | 2

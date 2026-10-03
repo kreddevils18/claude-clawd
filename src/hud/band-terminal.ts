@@ -11,7 +11,7 @@ const BADGE = toHex(PALETTE.spark)
 const LOGO = 9
 const GAP = 2
 
-export const titleSpans = (m: BandModel): Span[] => [
+const titleSpans = (m: BandModel): Span[] => [
   { text: m.name, color: BODY, bold: true },
   { text: ` · Lv ${m.level} · `, dim: true },
   { text: m.label, bold: true },
